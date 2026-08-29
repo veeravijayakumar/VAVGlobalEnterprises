@@ -1,0 +1,266 @@
+/* =========================================
+   RESPONSIVE DESIGN
+   Mobile + Tablet
+   ========================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    width: min(100% - 32px, 1200px);
+    margin-inline: auto;
+}
+
+/* Prevent long text/URLs from breaking layout */
+h1,
+h2,
+h3,
+h4,
+p,
+a {
+    overflow-wrap: anywhere;
+}
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+    .container {
+        width: min(100% - 40px, 960px);
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .shop_filter {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .form-actions {
+        flex-wrap: wrap;
+    }
+
+    .submit {
+        min-width: 180px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 767px) {
+
+    .container {
+        width: calc(100% - 24px);
+        max-width: none;
+    }
+
+    /* Typography */
+
+    h1 {
+        font-size: clamp(2rem, 9vw, 3rem);
+        line-height: 1.1;
+    }
+
+    h2 {
+        font-size: clamp(1.6rem, 7vw, 2.3rem);
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+
+    /* Navigation */
+
+    nav {
+        width: 100%;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+
+    /* Product Grid */
+
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .product {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .product img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+
+    /* Category filters */
+
+    .shop_filter {
+        display: flex;
+        width: 100%;
+        gap: 8px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        padding-bottom: 8px;
+        scrollbar-width: thin;
+    }
+
+    .shop_filter label {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+
+    /* Forms */
+
+    .form-card {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .field {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .input,
+    .select,
+    .textarea {
+        width: 100%;
+        max-width: 100%;
+        font-size: 16px;
+    }
+
+    .textarea {
+        min-height: 140px;
+    }
+
+
+    /* Form buttons */
+
+    .form-actions {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .form-actions .submit {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    /* Tables */
+
+    table {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+
+    /* Sections */
+
+    section {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+
+    /* Buttons */
+
+    button {
+        max-width: 100%;
+    }
+
+
+    /* Cards */
+
+    .card {
+        width: 100%;
+        min-width: 0;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .container {
+        width: calc(100% - 20px);
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-card {
+        padding: 16px;
+    }
+
+    .shop_filter label {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+
+}
