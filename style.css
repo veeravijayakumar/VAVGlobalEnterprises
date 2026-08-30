@@ -264,3 +264,63 @@ a {
     }
 
 }
+
+/* ================================
+   MOBILE HAMBURGER MENU
+================================ */
+
+.menu-toggle {
+    display: none;
+    border: none;
+    background: transparent;
+    color: #000;
+    font-size: 30px;
+    line-height: 1;
+    padding: 8px 12px;
+    cursor: pointer;
+    position: relative;
+    z-index: 9999;
+}
+
+/* Tablet + Mobile */
+@media (max-width: 991px) {
+
+    .menu-toggle {
+        display: block;
+        margin-left: auto;
+    }
+
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 9998;
+        background: #fff;
+    }
+
+    .main-nav.active {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-nav a {
+        display: block;
+        width: 100%;
+        padding: 14px 20px;
+        text-decoration: none;
+    }
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .main-nav {
+        display: flex;
+    }
+}
