@@ -313,61 +313,173 @@ a {
     border-radius: 2px;
 }
 
-/* =========================================
-   MOBILE + TABLET
-========================================= */
+/* =====================================================
+   MOBILE NAVIGATION - FINAL FIX
+===================================================== */
 
-@media screen and (max-width: 991px) {
-
-    .menu-toggle {
-        display: flex !important;
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .main-nav {
-        display: none !important;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        width: 100%;
-        z-index: 99998;
-
-        background: #f8f3ec;
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    .main-nav.active {
-        display: flex !important;
-        flex-direction: column;
-    }
-
-    .main-nav a {
-        display: block;
-        width: 100%;
-        padding: 16px 24px;
-        color: #222;
-        text-decoration: none;
-        font-size: 16px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    }
+/* Hidden on desktop */
+.mobile-menu-btn {
+    display: none;
 }
 
-/* =========================================
-   DESKTOP
-========================================= */
+/* =====================================================
+   TABLET + MOBILE
+===================================================== */
 
-@media screen and (min-width: 992px) {
+@media screen and (max-width: 768px) {
 
-    .menu-toggle {
+    .nav {
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+
+        min-height: 72px;
+        padding: 0.7rem 1rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav__logo-link {
+        flex-shrink: 0;
+    }
+
+    .nav__logo-img {
+        height: 2.6rem;
+        width: auto;
+    }
+
+    /* Hide desktop links */
+    .nav__menu {
         display: none !important;
     }
 
-    .main-nav {
+    /* Hide wholesale button */
+    .nav__cta {
+        display: none !important;
+    }
+
+    /* Keep WhatsApp + Search + Hamburger */
+    .nav__actions {
         display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-left: auto;
+    }
+
+    .nav__icon {
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
+    }
+
+    /* HAMBURGER */
+    .mobile-menu-btn {
+        display: flex !important;
+
+        width: 42px;
+        height: 42px;
+
+        padding: 8px;
+        margin: 0;
+
+        border: 1px solid var(--line);
+        border-radius: 50%;
+
+        background: transparent;
+
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        gap: 4px;
+
+        cursor: pointer;
+
+        position: relative;
+        z-index: 10001;
+    }
+
+    .mobile-menu-btn span {
+        display: block;
+
+        width: 21px;
+        height: 2px;
+
+        background: var(--wine);
+
+        border-radius: 2px;
+
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease;
+    }
+
+    /* =================================================
+       OPEN MOBILE MENU
+    ================================================= */
+
+    .nav.mobile-open .nav__menu {
+        display: flex !important;
+
+        position: absolute;
+
+        top: 100%;
+        left: 0;
+
+        width: 100%;
+
+        margin: 0;
+        padding: 0.8rem 0;
+
+        background: var(--bg);
+
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+        flex-direction: column;
+
+        gap: 0;
+
+        z-index: 10000;
+    }
+
+    .nav.mobile-open .nav__menu li {
+        width: 100%;
+        list-style: none;
+    }
+
+    .nav.mobile-open .nav__menu a {
+        display: block;
+
+        width: 100%;
+
+        padding: 15px 24px;
+
+        font-size: 0.75rem;
+
+        color: var(--text-emp);
+
+        border-bottom: 1px solid var(--line);
+    }
+
+    .nav.mobile-open .nav__menu li:last-child a {
+        border-bottom: none;
+    }
+
+    /* Hamburger animation */
+    .nav.mobile-open .mobile-menu-btn span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+    }
+
+    .nav.mobile-open .mobile-menu-btn span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav.mobile-open .mobile-menu-btn span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
     }
 }
