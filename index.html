@@ -181,7 +181,7 @@ body:has(.page:target) #home { display: none; }
 /* Active nav state via :has() */
 body:not(:has(.page:target)) .nav__menu a[href="#home"],
 body:has(#about:target) .nav__menu a[href="#about"],
-body:has(#gallery:target) .nav__menu a[href="#gallery"],
+/* body:has(#gallery:target) .nav__menu a[href="#gallery"], */
 body:has(#collection:target) .nav__menu a[href="#collection"],
 body:has(#enquiry:target) .nav__menu a[href="#enquiry"],
 body:has(#contact:target) .nav__menu a[href="#contact"] {
@@ -189,7 +189,7 @@ body:has(#contact:target) .nav__menu a[href="#contact"] {
 }
 body:not(:has(.page:target)) .nav__menu a[href="#home"]::after,
 body:has(#about:target) .nav__menu a[href="#about"]::after,
-body:has(#gallery:target) .nav__menu a[href="#gallery"]::after,
+/* body:has(#gallery:target) .nav__menu a[href="#gallery"]::after, */
 body:has(#collection:target) .nav__menu a[href="#collection"]::after,
 body:has(#enquiry:target) .nav__menu a[href="#enquiry"]::after,
 body:has(#contact:target) .nav__menu a[href="#contact"]::after {
@@ -1262,6 +1262,160 @@ body::before {
     }
 }
 </style>
+
+<style>
+/* ============================================================
+   VAV PRODUCT VARIANT BUCKETS + AMAZON-STYLE GALLERY
+   Works independently for Inner Wear, Bra and Pants.
+   ============================================================ */
+
+.variant-product {
+  min-width: 0;
+}
+
+.variant-main-media {
+  position: relative;
+  background: var(--bg-deep);
+}
+
+.variant-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.variant-gallery-thumbs {
+  display: flex;
+  gap: 0.55rem;
+  margin: -0.25rem 0 1rem;
+  overflow-x: auto;
+  padding: 0.2rem 0.1rem 0.45rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) transparent;
+}
+
+.variant-gallery-thumbs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.variant-gallery-thumbs::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 10px;
+}
+
+.variant-thumb {
+  width: 58px;
+  height: 68px;
+  min-width: 58px;
+  padding: 2px;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: border-color .25s ease, transform .25s ease;
+}
+
+.variant-thumb:hover {
+  transform: translateY(-2px);
+  border-color: var(--wine);
+}
+
+.variant-thumb.active {
+  border: 2px solid var(--wine);
+}
+
+.variant-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.variant-colour-label {
+  margin: 0.8rem 0 0.55rem;
+  font-size: 0.72rem;
+  color: var(--text-mute);
+  letter-spacing: 0.08em;
+}
+
+.variant-colour-label strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.variant-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.variant-swatch {
+  width: 34px;
+  height: 34px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.variant-swatch:hover {
+  transform: scale(1.08);
+  border-color: var(--wine);
+}
+
+.variant-swatch.active {
+  border: 2px solid var(--wine);
+  box-shadow: 0 0 0 2px var(--bg-card), 0 0 0 3px var(--wine);
+}
+
+.variant-swatch__dot {
+  display: block;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,.18);
+}
+
+@media screen and (max-width: 768px) {
+  .variant-gallery-thumbs {
+    gap: 0.45rem;
+  }
+
+  .variant-thumb {
+    width: 54px;
+    height: 64px;
+    min-width: 54px;
+  }
+
+  .variant-swatch {
+    width: 32px;
+    height: 32px;
+  }
+
+  .variant-swatch__dot {
+    width: 21px;
+    height: 21px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .variant-thumb {
+    width: 50px;
+    height: 60px;
+    min-width: 50px;
+  }
+
+  .variant-swatches {
+    gap: 0.65rem;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -1270,6 +1424,22 @@ body::before {
   <div class="announce__track">
     <!-- <span>VAV Global Enterprises</span> -->
     <!-- <span>WhatsApp us for bulk enquiries</span> -->
+    <!-- <span class="announcement-quality">
+      ✦ &nbsp; WE NEVER COMPROMISE ON OUR QUALITY &nbsp; ✦
+    </span>
+
+    <span class="announcement-new">
+      ★ &nbsp; NEW ARRIVALS
+    </span> -->
+
+    <!-- Duplicate for seamless continuous scrolling -->
+    <!-- <span class="announcement-quality">
+      ✦ &nbsp; WE NEVER COMPROMISE ON OUR QUALITY &nbsp; ✦
+    </span> -->
+
+    <!-- <span class="announcement-new">
+      ★ &nbsp; NEW ARRIVALS
+    </span> -->
     <span> We Never Compromise on Our Quality</span>
     
     <span>
@@ -1330,6 +1500,13 @@ body::before {
 
 <a href="https://www.instagram.com/vavglobalenterprises?igsi=OW9meXhidnYxbzc2" class="shimmer-blink-btn">
   <span class="btn-icon">✨</span>NEW ARRIVALS
+    <!-- <span class="announcement-quality">
+      ✦ &nbsp; WE NEVER COMPROMISE ON OUR QUALITY &nbsp; ✦
+    </span> -->
+
+    <!-- <span class="announcement-new">
+      ★ &nbsp; NEW ARRIVALS
+    </span> -->
 </a>
 
 
@@ -1415,7 +1592,7 @@ body::before {
   <ul class="nav__menu">
     <li><a href="#home">Home</a></li>
     <li><a href="#about">About Us</a></li>
-    <li><a href="#gallery">Gallery</a></li>
+    <!-- <li><a href="#gallery">Gallery</a></li> -->
     <li><a href="#collection">Collection</a></li>
     <li><a href="#enquiry">Enquiry</a></li>
     <li><a href="#contact">Contact Us</a></li>
@@ -1476,22 +1653,22 @@ body::before {
         <a href="#about" class="btn btn--ghost">Our Story</a>
       </div>
       <div class="hero__stats">
-        <div><div class="hero__stat-num">14</div><div class="hero__stat-label">Years of Craft</div></div>
-        <div><div class="hero__stat-num">2.4M</div><div class="hero__stat-label">Pieces / Year</div></div>
+        <div><div class="hero__stat-num">06</div><div class="hero__stat-label">Years of Craft</div></div>
+        <div><div class="hero__stat-num">1.4M</div><div class="hero__stat-label">Pieces / Year</div></div>
         <div><div class="hero__stat-num">82</div><div class="hero__stat-label">Partners</div></div>
       </div>
     </div>
     <div class="hero__right">
       <div class="hero__media">
-        <img src="Images/Saree1_logo_cloth.jpg" alt="Folded premium cotton inner wear">
+        <img src="WomensInner/Image6.jpeg" alt="Folded premium cotton inner wear">
       </div>
       <div class="hero__badge">
         <div class="hero__badge-label" style="color: #161616;">Piece of the Month</div>
         <!-- <div class="hero__badge-value">Micro-modal Trunk</div> -->
       </div>
       <div class="hero__price-tag">
-        <div class="hero__price-label">Starting at</div>
-        <div class="hero__price-value">₹ 1,400<span class="hero__price-old">₹ 1,999</span></div>
+        <div class="hero__price-label">Pack of 3</div>
+        <div class="hero__price-value">₹ 699<span class="hero__price-old">₹ 449</span></div>
       </div>
     </div>
 
@@ -1745,7 +1922,7 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div>
           <div class="timeline__item">
             <div class="timeline__year">2024</div>
-            <div class="timeline__title">2.4M Pieces / Year</div>
+            <div class="timeline__title">1.4M Pieces / Year</div>
             <p class="timeline__desc">Now producing 2.4 million pieces annually with 82 wholesale partners across India. Active Base line launched with recycled poly-spandex for sport and long-shift wear.</p>
           </div>
         </div>
@@ -1758,7 +1935,7 @@ At V, we believe quality should feel accessible. Our production capabilities all
 <!-- ========================================== -->
 <!-- ============ GALLERY PAGE =============== -->
 <!-- ========================================== -->
-<main class="page" id="gallery">
+<!-- <main class="page" id="gallery">
 
   <header class="page-hero">
     <div class="page-hero__watermark">Gallery</div>
@@ -1781,32 +1958,32 @@ At V, we believe quality should feel accessible. Our production capabilities all
           
           <div class="gallery__caption"><div class="gallery__caption-num" style="color: white;">The SecondSkin CloudComfort Wireless Bra</div><div class="gallery__caption-title" style="color: black;">
             <p style="color: rgb(241, 206, 7);"></p>Pure Lenzing modal luxury. Zero wires. Zero seams.<br>
-            <!-- 4% spandex<br>
+            4% spandex<br>
             Style:Classic<br>
             Description:Breathable cotton elastane strech fabric<br>
             Specifications:<br>
             ●Full coverage panty with inner elastic for snug fit and all day comfort<br>
             ●Forward side same for added coverage<br>
             ●Oft-grip waist elastic feels easy on skin.<br> -->
-          </div></div>
-        </div>
-        <div class="gallery-item gallery-item--2">
-          <img src="Images/Braaa2.jpeg" alt="Folded cotton">
+          <!-- </div></div> -->
+        <!-- </div> -->
+        <!-- <div class="gallery-item gallery-item--2"> -->
+          <!-- <img src="Images/Braaa2.jpeg" alt="Folded cotton">
           
         <div class="gallery__caption"><div class="gallery__caption-num" style="color: white;">The SecondSkin CloudComfort Wireless Bra</div><div class="gallery__caption-title" style="color: black;">
-            <p style="color: rgb(241, 206, 7);"></p>Pure Lenzing modal luxury. Zero wires. Zero seams.<br>
+            <p style="color: rgb(241, 206, 7);"></p>Pure Lenzing modal luxury. Zero wires. Zero seams.<br> -->
           <!-- <div class="colors"><label><input type="radio" name="color" value="#010080"><span style="background:#010080"></span></label><label><input type="radio" name="color" value="#BCABA1" checked><span style="background:#BCABA1"></span></label><label><input type="radio" name="color" value="#E66E70"><span style="background:#E66E70"></span></label><label><input type="radio" name="color" value="#8B8565"><span style="background:#8B8565"></span></label><label><input type="radio" name="color" value="#8A6F78"><span style="background:#8A6F78"></span></label><label><input type="radio" name="color" value="#967969"><span style="background:#967969"></span></label></div>
           <div class="gallery__caption"><div class="gallery__caption-num">02 / 09</div><div class="gallery__caption-title">Folded, 40s Combed</div></div>
           <div class="colors"><label><input type="radio" name="color" value="#010080"><span style="background:#010080"></span></label><label><input type="radio" name="color" value="#BCABA1" checked><span style="background:#BCABA1"></span></label><label><input type="radio" name="color" value="#E66E70"><span style="background:#E66E70"></span></label><label><input type="radio" name="color" value="#8B8565"><span style="background:#8B8565"></span></label><label><input type="radio" name="color" value="#8A6F78"><span style="background:#8A6F78"></span></label><label><input type="radio" name="color" value="#967969"><span style="background:#967969"></span></label></div> -->
-          </div>
+          <!-- </div>
         </div>
-      </div>
+      </div> -->
 
-        <div class="gallery-item gallery-item--3">
-          <img src="Images/Saree1.jpeg" alt="Seam detail">
+        <!-- <div class="gallery-item gallery-item--3">
+          <img src="Images/Saree1.jpeg" alt="Seam detail"> -->
           <!-- <div class="product__meta"><h3 class="product__title">Kanchi cotton</h3><div class="product__price">₹ 1,400</div></div> -->
           <!-- <p class="product__desc">Kanchi Cotton Elegance with Antique Golden Zari</p> -->
-          <div class="gallery__caption"><div class="gallery__caption-num">Kanchi cotton</div><div class="gallery__caption-title">Kanchi Cotton Elegance with Antique Golden Zari</div></div>
+          <!-- <div class="gallery__caption"><div class="gallery__caption-num">Kanchi cotton</div><div class="gallery__caption-title">Kanchi Cotton Elegance with Antique Golden Zari</div></div>
         </div>
 
 
@@ -1816,11 +1993,11 @@ At V, we believe quality should feel accessible. Our production capabilities all
         </div>
 
         <div class="gallery-item gallery-item--5">
-          <img src="WomensInner/Image4.jpeg" alt="Lifestyle">
+          <img src="WomensInner/Image4.jpeg" alt="Lifestyle"> -->
 
           <!-- <div class="gallery__caption"><div class="gallery__caption-num">05 / 09</div><div class="gallery__caption-title">Worn Close</div></div> -->
         
-            <div class="gallery__caption"><div class="gallery__caption-title" style="color: rgb(148, 32, 3);">Modal panty</div><div class="gallery__caption-title" style="color: rgb(247, 243, 4);">
+            <!-- <div class="gallery__caption"><div class="gallery__caption-title" style="color: rgb(148, 32, 3);">Modal panty</div><div class="gallery__caption-title" style="color: rgb(247, 243, 4);">
             <p style="color: rgb(245, 139, 17);"></p>96% cotton<br>
             4% spandex<br>
             Style:Classic<br>
@@ -1832,22 +2009,22 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div></div>  
         </div>
 
-        <div class="gallery-item gallery-item--6">
-          <img src="Panty/Pant12.jpeg" alt="Factory floor">
+        <div class="gallery-item gallery-item--6"> -->
+          <!-- <img src="Panty/Pant12.jpeg" alt="Factory floor">
           <div class="gallery__caption"><div class="gallery__caption-num" style="color: rgb(255, 255, 252);">Ultra-Stretch Premium Ankle-Length Pants</div><div class="gallery__caption-title" style="color: rgb(15, 3, 3);">
             Elite Comfort High-Rise Cropped Pants<br>
             <strong> Squat-proof thick fabric, 4-way ultra-stretch, premium heavy-knit cotton blend, zero opacity worries</strong><br>
             Contours and flatters, sculpting silhouette, elasticated high-rise waistband, functional pockets.<br>
-           Desk-to-dinner essential, effortlessly chic, crisp tailored finish. <br>
+           Desk-to-dinner essential, effortlessly chic, crisp tailored finish. <br> -->
             <!-- Strap type-Convertible<br> -->
             <!-- Underline Type-Wire Free<br> -->
             <!-- Closure Type:Hook and eye -->
-          </div>
+          <!-- </div>
         </div>
 
         <div class="gallery-item gallery-item--7">
           <img src="Panty/Pant12.jpeg" alt="Modal trunk">
-          <!-- <div class="gallery__caption"><div class="gallery__caption-num">Ultra-Stretch Premium Ankle-Length Pants</div><div class="gallery__caption-title">Elite Comfort High-Rise Cropped Pants</div></div> -->
+          <div class="gallery__caption"><div class="gallery__caption-num">Ultra-Stretch Premium Ankle-Length Pants</div><div class="gallery__caption-title">Elite Comfort High-Rise Cropped Pants</div></div>
           <div class="gallery__caption"><div class="gallery__caption-num" style="color: black;">06 / 09</div><div class="gallery__caption-title" style="color: rgb(15, 3, 3);">
             V circle fit Bra for women | cotton spandex, Wireless, Side cushioning    | Reinforced stitches | Seamless Fit for Full Figure<br>
             <strong> Style</strong><br>
@@ -1855,12 +2032,12 @@ At V, we believe quality should feel accessible. Our production capabilities all
             Bra Cup Coverage-Full coverage <br>
             Strap type-Convertible<br>
             Underline Type-Wire Free<br>
-            Closure Type:Hook and eye</div></div>       
+            Closure Type:Hook and eye</div></div>        -->
         
 
 
 
-        <div class="gallery-item gallery-item--8">
+        <!-- <div class="gallery-item gallery-item--8">
           <img src="Images/braaa6.png" alt="Bamboo jersey">
           <div class="gallery__caption"><div class="gallery__caption-num">08 / 09</div><div class="gallery__caption-title">Bamboo Jersey, Brushed</div></div>
         </div>
@@ -1883,7 +2060,9 @@ At V, we believe quality should feel accessible. Our production capabilities all
     </div>
   </section>
 
-</main>
+</main> -->
+
+
 
 <!-- ========================================== -->
 <!-- ============ COLLECTION PAGE ============ -->
@@ -1939,26 +2118,7 @@ At V, we believe quality should feel accessible. Our production capabilities all
       </div>
 
       <div class="product-grid">
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
-          <div class="product__media">
-            <span class="product__badge">Bestseller</span>
-            <img src="WomensInner\Image1.jpeg" alt="Men's cotton vest">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <div class="product__meta"><h3 class="product__title">Cloud soft panty</h3><div class="product__price">₹ 160</div></div>
-            <p style="color: white;"></p>96% cotton<br>
-            4% spandex<br>
-            Style:<strong>Classic</strong><br>
-            <strong>Description:</strong>Breathable cotton elastane strech fabric<br>
-            <strong>Specifications:</strong><br>
-            ●Full coverage panty with inner elastic for snug fit and all day comfort<br>
-            ●Forward side same for added coverage<br>
-            ●Oft-grip waist elastic feels easy on skin.<br>
-          <!-- <p class="product__desc">Men's essential vest in 40s combed cotton. Flatlock seams, no-roll armholes.</p> -->
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--white"></span><span class="product__swatch product__swatch--grey"></span><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
+      <!-- <article class="product" data-cat="WOMEN'S INNER WEAR">
           <div class="product__media">
             <span class="product__badge product__badge--new">New</span>
             <img src="WomensInner\Image2.jpeg" alt="Women's bamboo brief">
@@ -1973,31 +2133,11 @@ At V, we believe quality should feel accessible. Our production capabilities all
             ●Full coverage panty with inner elastic for snug fit and all day comfort<br>
             ●Forward side same for added coverage<br>
             ●Oft-grip waist elastic feels easy on skin.<br>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--white"></span></div> -->
-        </article>
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
+          <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--white"></span></div>
+        </article> -->
+        <!-- <article class="product" data-cat="WOMEN'S INNER WEAR">
           <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
-            <img src="WomensInner\Image3.jpeg" alt="Premium modal trunk">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <div class="product__meta"><h3 class="product__title">Cloud soft panty</h3><div class="product__price">₹ 160</div></div>
-            <p style="color: white;"></p>96% cotton<br>
-            4% spandex<br>
-            Style:<strong>Classic</strong><br>
-            <strong>Description:</strong>Breathable cotton elastane strech fabric<br>
-            <strong>Specifications:</strong><br>
-            ●Full coverage panty with inner elastic for snug fit and all day comfort<br>
-            ●Forward side same for added coverage<br>
-            ●Oft-grip waist elastic feels easy on skin.<br>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
+            <span class="product__badge product__badge--new">New</span>
             <img src="WomensInner\Image4.jpeg" alt="Premium modal trunk">
             <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
           </div>
@@ -2010,36 +2150,16 @@ At V, we believe quality should feel accessible. Our production capabilities all
             ●Full coverage panty with inner elastic for snug fit and all day comfort<br>
             ●Forward side same for added coverage<br>
             ●Oft-grip waist elastic feels easy on skin.<br>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-
+          <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div>
+        </article> -->
         <article class="product" data-cat="WOMEN'S INNER WEAR">
           <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
-            <img src="WomensInner\Image5.jpeg" alt="Premium modal trunk">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <div class="product__meta"><h3 class="product__title">Cloud soft panty</h3><div class="product__price">₹ 160</div></div>
-            <p style="color: white;"></p>96% cotton<br>
-            4% spandex<br>
-            Style:<strong>Classic</strong><br>
-            <strong>Description:</strong>Breathable cotton elastane strech fabric<br>
-            <strong>Specifications:</strong><br>
-            ●Full coverage panty with inner elastic for snug fit and all day comfort<br>
-            ●Forward side same for added coverage<br>
-            ●Oft-grip waist elastic feels easy on skin.<br>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
+            <span class="product__badge product__badge--new">New</span>
             <img src="WomensInner\Image6.jpeg" alt="Premium modal trunk">
             <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
           </div>
-          <!-- <div class="product__meta"><h3 class="product__title">Micro-modal Trunk</h3><div class="product__price">₹ 890<span class="product__price-old">₹ 1,190</span></div></div>
-          <p class="product__desc">220 gsm Lenzing modal. Bonded waistband, single back panel, no side seams.</p> -->
+          <!-- <div class="product__meta"><h3 class="product__title">Micro-modal Trunk</h3><div class="product__price">₹ 890<span class="product__price-old">₹ 1,190</span></div></div> -->
+          <!-- <p class="product__desc">220 gsm Lenzing modal. Bonded waistband, single back panel, no side seams.</p> -->
             <div class="product__meta"><h3 class="product__title">Cloud soft panty - Combo</h3><div class="product__price">Pack of 3-₹.449</div></div>
             <p style="color: white;"></p>96% cotton<br>
             4% spandex<br>
@@ -2051,33 +2171,9 @@ At V, we believe quality should feel accessible. Our production capabilities all
             ●Oft-grip waist elastic feels easy on skin.<br>
           <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
         </article>
-
-
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
+        <!-- <article class="product" data-cat="WOMEN'S INNER WEAR">
           <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
-            <img src="WomensInner\Image8.jpeg" alt="Premium modal trunk">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-            <div class="product__meta"><h3 class="product__title">Cloud soft panty</h3><div class="product__price">₹ 160</div></div>
-            <p style="color: white;"></p>96% cotton<br>
-            4% spandex<br>
-            Style:<strong>Classic</strong><br>
-            <strong>Description:</strong>Breathable cotton elastane strech fabric<br>
-            <strong>Specifications:</strong><br>
-            ●Full coverage panty with inner elastic for snug fit and all day comfort<br>
-            ●Forward side same for added coverage<br>
-            ●Oft-grip waist elastic feels easy on skin.<br>
-          <!-- <div class="product__meta"><h3 class="product__title">Micro-modal Trunk</h3><div class="product__price">₹ 890<span class="product__price-old">₹ 1,190</span></div></div>
-          <p class="product__desc">220 gsm Lenzing modal. Bonded waistband, single back panel, no side seams.</p> -->
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
+            <span class="product__badge product__badge--new">New</span>
             <img src="WomensInner\Image9.jpeg" alt="Premium modal trunk">
             <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
           </div>
@@ -2090,31 +2186,11 @@ At V, we believe quality should feel accessible. Our production capabilities all
             ●Full coverage panty with inner elastic for snug fit and all day comfort<br>
             ●Forward side same for added coverage<br>
             ●Oft-grip waist elastic feels easy on skin.<br>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
+          <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div>
+        </article> -->
+        <!-- <article class="product" data-cat="WOMEN'S INNER WEAR">
           <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
-            <img src="WomensInner\Image10.jpeg" alt="Premium modal trunk">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-            <div class="product__meta"><h3 class="product__title">Cloud soft panty</h3><div class="product__price">₹ 160</div></div>
-            <p style="color: white;"></p>96% cotton<br>
-            4% spandex<br>
-            Style:<strong>Classic</strong><br>
-            <strong>Description:</strong>Breathable cotton elastane strech fabric<br>
-            <strong>Specifications:</strong><br>
-            ●Full coverage panty with inner elastic for snug fit and all day comfort<br>
-            ●Forward side same for added coverage<br>
-            ●Oft-grip waist elastic feels easy on skin.<br>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
+            <span class="product__badge product__badge--new">New</span>
             <img src="WomensInner\Image11.jpeg" alt="Premium modal trunk">
             <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
           </div>
@@ -2127,30 +2203,11 @@ At V, we believe quality should feel accessible. Our production capabilities all
             ●Full coverage panty with inner elastic for snug fit and all day comfort<br>
             ●Forward side same for added coverage<br>
             ●Oft-grip waist elastic feels easy on skin.<br>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
+          <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div>
+        </article> -->
+       <!-- <article class="product" data-cat="WOMEN'S INNER WEAR">
           <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
-            <img src="WomensInner\Image12.jpeg" alt="Premium modal trunk">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-            <div class="product__meta"><h3 class="product__title">Cloud soft panty</h3><div class="product__price">₹ 160</div></div>
-            <p style="color: white;"></p>96% cotton<br>
-            4% spandex<br>
-            Style:<strong>Classic</strong><br>
-            <strong>Description:</strong>Breathable cotton elastane strech fabric<br>
-            <strong>Specifications:</strong><br>
-            ●Full coverage panty with inner elastic for snug fit and all day comfort<br>
-            ●Forward side same for added coverage<br>
-            ●Oft-grip waist elastic feels easy on skin.<br>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
+            <span class="product__badge product__badge--new">New</span>
             <img src="WomensInner\Image13.jpeg" alt="Premium modal trunk">
             <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
           </div>
@@ -2163,63 +2220,17 @@ At V, we believe quality should feel accessible. Our production capabilities all
             ●Full coverage panty with inner elastic for snug fit and all day comfort<br>
             ●Forward side same for added coverage<br>
             ●Oft-grip waist elastic feels easy on skin.<br>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
+          <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div>
+        </article> -->
+        <!-- <article class="product" data-cat="WOMEN'S INNER WEAR">
           <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
-            <img src="WomensInner\Image14.jpeg" alt="Premium modal trunk">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-            <div class="product__meta"><h3 class="product__title">Cloud soft panty</h3><div class="product__price">₹ 160</div></div>
-            <p style="color: white;"></p>96% cotton<br>
-            4% spandex<br>
-            Style:<strong>Classic</strong><br>
-            <strong>Description:</strong>Breathable cotton elastane strech fabric<br>
-            <strong>Specifications:</strong><br>
-            ●Full coverage panty with inner elastic for snug fit and all day comfort<br>
-            ●Forward side same for added coverage<br>
-            ●Oft-grip waist elastic feels easy on skin.<br>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
+            <span class="product__badge product__badge--new">New</span>
             <img src="Images\Braaa1.jpeg" alt="Premium modal trunk">
             <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
           </div>
           <div class="product__meta"><h3 class="product__title">The SecondSkin CloudComfort Wireless Bra</h3><div class="product__price">₹ 339<span class="product__price-old">₹ 899</span></div></div>
           <p class="product__desc">Pure Lenzing modal luxury. Zero wires. Zero seams.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-          <div class="product__swatches">
-            <span class="product__swatch" style="background-color: #000185;"></span>
-            <span class="product__swatch" style="background-color: #b9988a;"></span>
-            <span class="product__swatch" style="background-color: #e26a6a;"></span>
-            <span class="product__swatch" style="background-color: #838063;"></span>
-            <span class="product__swatch" style="background-color: #846b77;"></span>
-            <span class="product__swatch" style="background-color: #94786b;"></span>
-          </div>
-
-        </article>
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
-            <img src="Images\Braaa2.jpeg" alt="Premium modal trunk">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <!-- <div class="product__meta"><h3 class="product__title">Micro-modal Trunk</h3><div class="product__price">₹ 890<span class="product__price-old">₹ 1,190</span></div></div>
-          <p class="product__desc">220 gsm Lenzing modal. Bonded waistband, single back panel, no side seams.</p>
           <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div>
-         -->
-        
-           <div class="product__meta"><h3 class="product__title">The SecondSkin CloudComfort Wireless Bra</h3><div class="product__price">₹ 339<span class="product__price-old">₹ 899</span></div></div>
-          <p class="product__desc">Pure Lenzing modal luxury. Zero wires. Zero seams.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
           <div class="product__swatches">
             <span class="product__swatch" style="background-color: #000185;"></span>
             <span class="product__swatch" style="background-color: #b9988a;"></span>
@@ -2228,125 +2239,64 @@ At V, we believe quality should feel accessible. Our production capabilities all
             <span class="product__swatch" style="background-color: #846b77;"></span>
             <span class="product__swatch" style="background-color: #94786b;"></span>
           </div>
-        
-        
-        </article>
 
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
+        </article> -->
+      <!-- <article class="product" data-cat="WOMEN'S INNER WEAR">
           <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
+            <span class="product__badge product__badge--new">New</span>
             <img src="Images\Braaa3.jpeg" alt="Premium modal trunk">
             <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
+          </div> -->
           <!-- <div class="product__meta"><h3 class="product__title">Micro-modal Trunk</h3><div class="product__price">₹ 890<span class="product__price-old">₹ 1,190</span></div></div>
           <p class="product__desc">220 gsm Lenzing modal. Bonded waistband, single back panel, no side seams.</p>
           <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-          <div class="product__meta"><h3 class="product__title">The SecondSkin CloudComfort Wireless Bra</h3><div class="product__price">₹ 339<span class="product__price-old">₹ 899</span></div></div>
-          <p class="product__desc">Pure Lenzing modal luxury. Zero wires. Zero seams.</p>
+          <!-- <div class="product__meta"><h3 class="product__title">The SecondSkin CloudComfort Wireless Bra</h3><div class="product__price">₹ 339<span class="product__price-old">₹ 899</span></div></div>
+          <p class="product__desc">Pure Lenzing modal luxury. Zero wires. Zero seams.</p> -->
           <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-          <div class="product__swatches">
+          <!-- <div class="product__swatches">
             <span class="product__swatch" style="background-color: #000185;"></span>
             <span class="product__swatch" style="background-color: #b9988a;"></span>
             <span class="product__swatch" style="background-color: #e26a6a;"></span>
             <span class="product__swatch" style="background-color: #838063;"></span>
             <span class="product__swatch" style="background-color: #846b77;"></span>
             <span class="product__swatch" style="background-color: #94786b;"></span>
-          </div>        
-        </article>
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
+          </div>         -->
+        <!-- </article> -->
+        <!-- <article class="product" data-cat="WOMEN'S INNER WEAR">
           <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
-            <img src="Images\Braaa4.jpeg" alt="Premium modal trunk">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <!-- <div class="product__meta"><h3 class="product__title">Micro-modal Trunk</h3><div class="product__price">₹ 890<span class="product__price-old">₹ 1,190</span></div></div>
-          <p class="product__desc">220 gsm Lenzing modal. Bonded waistband, single back panel, no side seams.</p>
-          <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-          <div class="product__meta"><h3 class="product__title">The SecondSkin CloudComfort Wireless Bra</h3><div class="product__price">₹ 339<span class="product__price-old">₹ 899</span></div></div>
-          <p class="product__desc">Pure Lenzing modal luxury. Zero wires. Zero seams.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-          <div class="product__swatches">
-            <span class="product__swatch" style="background-color: #000185;"></span>
-            <span class="product__swatch" style="background-color: #b9988a;"></span>
-            <span class="product__swatch" style="background-color: #e26a6a;"></span>
-            <span class="product__swatch" style="background-color: #838063;"></span>
-            <span class="product__swatch" style="background-color: #846b77;"></span>
-            <span class="product__swatch" style="background-color: #94786b;"></span>
-          </div>       
-       
-        </article>
-
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
+            <span class="product__badge product__badge--new">New</span>
             <img src="Images\Braaa5.jpeg" alt="Premium modal trunk">
             <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
+          </div> -->
           <!-- <div class="product__meta"><h3 class="product__title">Micro-modal Trunk</h3><div class="product__price">₹ 890<span class="product__price-old">₹ 1,190</span></div></div>
           <p class="product__desc">220 gsm Lenzing modal. Bonded waistband, single back panel, no side seams.</p>
           <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        
+<!--         
           <div class="product__meta"><h3 class="product__title">The SecondSkin CloudComfort Wireless Bra</h3><div class="product__price">₹ 339<span class="product__price-old">₹ 899</span></div></div>
-          <p class="product__desc">Pure Lenzing modal luxury. Zero wires. Zero seams.</p>
+          <p class="product__desc">Pure Lenzing modal luxury. Zero wires. Zero seams.</p> -->
           <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-          <div class="product__swatches">
+          <!-- <div class="product__swatches">
             <span class="product__swatch" style="background-color: #000185;"></span>
             <span class="product__swatch" style="background-color: #b9988a;"></span>
             <span class="product__swatch" style="background-color: #e26a6a;"></span>
             <span class="product__swatch" style="background-color: #838063;"></span>
             <span class="product__swatch" style="background-color: #846b77;"></span>
             <span class="product__swatch" style="background-color: #94786b;"></span>
-          </div>        
-        
-        
-        </article>
-
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
+          </div>         -->
+        <!-- </article> -->
+        <!-- <article class="product" data-cat="WOMEN'S INNER WEAR">
           <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
-            <img src="Images\Braaa6.jpeg" alt="Premium modal trunk">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <!-- <div class="product__meta"><h3 class="product__title">Micro-modal Trunk</h3><div class="product__price">₹ 890<span class="product__price-old">₹ 1,190</span></div></div>
-          <p class="product__desc">220 gsm Lenzing modal. Bonded waistband, single back panel, no side seams.</p>
-          <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-     
-          <div class="product__meta"><h3 class="product__title">The SecondSkin CloudComfort Wireless Bra</h3><div class="product__price">₹ 339<span class="product__price-old">₹ 899</span></div></div>
-          <p class="product__desc">Pure Lenzing modal luxury. Zero wires. Zero seams.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-          <div class="product__swatches">
-            <span class="product__swatch" style="background-color: #000185;"></span>
-            <span class="product__swatch" style="background-color: #b9988a;"></span>
-            <span class="product__swatch" style="background-color: #e26a6a;"></span>
-            <span class="product__swatch" style="background-color: #838063;"></span>
-            <span class="product__swatch" style="background-color: #846b77;"></span>
-            <span class="product__swatch" style="background-color: #94786b;"></span>
-          </div>     
-     
-     
-     
-        </article>
-
-
-
-
-        <article class="product" data-cat="WOMEN'S INNER WEAR">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">Limited</span>
+            <span class="product__badge product__badge--new">New</span>
             <img src="Images\Braaa7.jpeg" alt="Premium modal trunk">
             <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
+          </div> -->
           <!-- <div class="product__meta"><h3 class="product__title">Micro-modal Trunk</h3><div class="product__price">₹ 890<span class="product__price-old">₹ 1,190</span></div></div>
           <p class="product__desc">220 gsm Lenzing modal. Bonded waistband, single back panel, no side seams.</p>
           <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-          <div class="product__meta"><h3 class="product__title">The SecondSkin CloudComfort Wireless Bra</h3><div class="product__price">₹ 339<span class="product__price-old">₹ 899</span></div></div>
-          <p class="product__desc">Pure Lenzing modal luxury. Zero wires. Zero seams.</p>
+          <!-- <div class="product__meta"><h3 class="product__title">The SecondSkin CloudComfort Wireless Bra</h3><div class="product__price">₹ 339<span class="product__price-old">₹ 899</span></div></div>
+          <p class="product__desc">Pure Lenzing modal luxury. Zero wires. Zero seams.</p> -->
           <!-- <div class="product__swatches"><span class="product__swatch product__swatch--black"></span><span class="product__swatch product__swatch--navy"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-          <div class="product__swatches">
+          <!-- <div class="product__swatches">
             <span class="product__swatch" style="background-color: #000185;"></span>
             <span class="product__swatch" style="background-color: #b9988a;"></span>
             <span class="product__swatch" style="background-color: #e26a6a;"></span>
@@ -2354,10 +2304,266 @@ At V, we believe quality should feel accessible. Our production capabilities all
             <span class="product__swatch" style="background-color: #846b77;"></span>
             <span class="product__swatch" style="background-color: #94786b;"></span>
           </div>       
-       
-       
-       
+        </article> -->
+
+
+
+        <article class="product variant-product" data-cat="WOMEN'S INNER WEAR" id="innerwear-colours">
+          <div class="product__media variant-main-media">
+            <span class="product__badge product__badge--new">New</span>
+            <img class="variant-main-image" src="WomensInner\Image1.jpeg" alt="Cloud soft panty">
+            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
+          </div>
+
+          <div class="variant-gallery-thumbs"><button type="button" class="variant-thumb active" data-image="WomensInner\Image1.jpeg">
+              <img src="WomensInner\Image1.jpeg" alt="Cloud soft panty image 1">
+            </button><button type="button" class="variant-thumb" data-image="WomensInner\Image2.jpeg">
+              <img src="WomensInner\Image2.jpeg" alt="Cloud soft panty image 2">
+            </button><button type="button" class="variant-thumb" data-image="WomensInner\Image3.jpeg">
+              <img src="WomensInner\Image3.jpeg" alt="Cloud soft panty image 3">
+            </button></div>
+
+          <div class="product__meta">
+            <h3 class="product__title">Cloud soft panty</h3>
+            <div class="product__price">₹ 160</div>
+          </div>
+
+          <p class="product__desc">96% cotton ·<br> 4% spandex ·<br> Breathable cotton elastane stretch fabric · <br>Full coverage and all-day comfort.<br> Forward side same for added coverage. <br>Oft-grip waist elastic feels easy on skin.</p>
+
+          <div class="variant-colour-label">
+            Colour: <strong class="variant-selected-name">Colour 1</strong>
+          </div>
+
+          <div class="variant-swatches">
+          <button type="button"
+            class="variant-swatch active"
+            data-variant-name="Colour 1"
+            data-images='[&quot;WomensInner\\Image111.jpeg&quot;,&quot;WomensInner\\Image112.jpeg&quot;]'
+            aria-label="Colour 1"
+            title="Colour 1">
+            <span class="variant-swatch__dot" style="background:#000185;"></span>
+          </button>
+          <button type="button"
+            class="variant-swatch"
+            data-variant-name="Colour 2"
+            data-images='[&quot;WomensInner\\Image113.jpeg&quot;,&quot;WomensInner\\Image114.jpeg&quot;]'
+            aria-label="Colour 2"
+            title="Colour 2">
+            <span class="variant-swatch__dot" style="background:#8fa436;"></span>
+          </button>
+          <button type="button"
+            class="variant-swatch"
+            data-variant-name="Colour 3"
+            data-images='[&quot;WomensInner\\Image115.jpeg&quot;,&quot;WomensInner\\Image116.jpeg&quot;,&quot;WomensInner\\Image117.jpeg&quot;,&quot;WomensInner\\Image118.jpeg&quot;]'
+            aria-label="Colour 3"
+            title="Colour 3">
+            <span class="variant-swatch__dot" style="background:#c00053;"></span>
+          </button>
+          <!-- <button type="button"
+            class="variant-swatch"
+            data-variant-name="Colour 4"
+            data-images='[&quot;WomensInner\\Image11.jpeg&quot;,&quot;WomensInner\\Image12.jpeg&quot;]'
+            aria-label="Colour 4"
+            title="Colour 4">
+            <span class="variant-swatch__dot" style="background:#838063;"></span>
+          </button>
+          <button type="button"
+            class="variant-swatch"
+            data-variant-name="Colour 5"
+            data-images='[&quot;WomensInner\\Image13.jpeg&quot;,&quot;WomensInner\\Image14.jpeg&quot;]'
+            aria-label="Colour 5"
+            title="Colour 5">
+            <span class="variant-swatch__dot" style="background:#846b77;"></span>
+          </button> -->
+          </div>
         </article>
+
+        <article class="product variant-product" data-cat="WOMEN'S INNER WEAR" id="bra-colours">
+          <div class="product__media variant-main-media">
+            <span class="product__badge product__badge--new">New</span>
+            <img class="variant-main-image" src="Images\Braaa1.jpeg" alt="The SecondSkin CloudComfort Wireless Bra">
+            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
+          </div>
+
+          <div class="variant-gallery-thumbs"><button type="button" class="variant-thumb active" data-image="Images\Braaa1.jpeg">
+              <img src="Images\Braaa1.jpeg" alt="The SecondSkin CloudComfort Wireless Bra image 1">
+            </button><button type="button" class="variant-thumb" data-image="Images\Braaa2.jpeg">
+              <img src="Images\Braaa2.jpeg" alt="The SecondSkin CloudComfort Wireless Bra image 2">
+            </button></div>
+
+          <div class="product__meta">
+            <h3 class="product__title">The SecondSkin CloudComfort Wireless Bra</h3>
+            <div class="product__price">₹ 339<span class="product__price-old">₹ 899</span></div>
+          </div>
+
+          <p class="product__desc">Pure Lenzing modal luxury. Zero wires. Zero seams.</p>
+
+          <div class="variant-colour-label">
+            Colour: <strong class="variant-selected-name">Colour 1</strong>
+          </div>
+
+          <div class="variant-swatches">
+          <button type="button"
+            class="variant-swatch active"
+            data-variant-name="Colour 1"
+            data-images='[&quot;Images\\Blue1.jpeg&quot;,&quot;Images\\Blue2.jpeg&quot;,&quot;Images\\Blue3.jpeg&quot;,&quot;Images\\Blue4.jpeg&quot;]'
+            aria-label="Colour 1"
+            title="Colour 1">
+            <span class="variant-swatch__dot" style="background:#000185;"></span>
+          </button>
+          <button type="button"
+            class="variant-swatch"
+            data-variant-name="Colour 2"
+            data-images='[&quot;Images\\Mauve1.jpeg&quot;,&quot;Images\\Mauve2.jpeg&quot;,&quot;Images\\Mauve3.jpeg&quot;,&quot;Images\\Mauve4.jpeg&quot;]'
+            aria-label="Colour 2"
+            title="Colour 2">
+            <span class="variant-swatch__dot" style="background:#a67c91;"></span>
+          </button>
+          <button type="button"
+            class="variant-swatch"
+            data-variant-name="Colour 3"
+            data-images='[&quot;Images\\Rose Gold1.jpeg&quot;,&quot;Images\\Rose Gold2.jpeg&quot;,&quot;Images\\Rose Gold3.jpeg&quot;,&quot;Images\\Rose Gold4.jpeg&quot;]'
+            aria-label="Colour 3"
+            title="Colour 3">
+            <span class="variant-swatch__dot" style="background:#cfaea8;"></span>
+          </button>
+          <button type="button"
+            class="variant-swatch"
+            data-variant-name="Colour 4"
+            data-images='[&quot;Images\\Sand1.jpeg&quot;,&quot;Images\\Sand2.jpeg&quot;,&quot;Images\\Sand3.jpeg&quot;,&quot;Images\\Sand4.jpeg&quot;]'
+            aria-label="Colour 4"
+            title="Colour 4">
+            <span class="variant-swatch__dot" style="background:#d3b194;"></span>
+          </button>
+
+          <button type="button"
+            class="variant-swatch"
+            data-variant-name="Colour 5"
+            data-images='[&quot;Images\\Sage Green1.jpeg&quot;,&quot;Images\\Sage Green2.jpeg&quot;,&quot;Images\\Sage Green3.jpeg&quot;,&quot;Images\\Sage Green4.jpeg&quot;]'
+            aria-label="Colour 5"
+            title="Colour 5">
+            <span class="variant-swatch__dot" style="background:#a6bab0;"></span>
+          </button>
+
+          <button type="button"
+            class="variant-swatch"
+            data-variant-name="Colour 5"
+            data-images='[&quot;Images\\Terracotta1.jpeg&quot;,&quot;Images\\Terracotta2.jpeg&quot;,&quot;Images\\Terracotta3.jpeg&quot;,&quot;Images\\Terracotta4.jpeg&quot;]'
+            aria-label="Colour 5"
+            title="Colour 5">
+            <span class="variant-swatch__dot" style="background:#d3837f;"></span>
+          </button>
+
+
+          </div>
+        </article>
+
+
+
+        <article class="product variant-product" data-cat="WOMEN'S PANTS" id="pants-colours">
+          <div class="product__media variant-main-media">
+            <span class="product__badge product__badge--new">New</span>
+            <img class="variant-main-image" src="Panty/Pant1.jpeg" alt="Ultra-Stretch Premium Ankle-Length Pants">
+            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
+          </div>
+
+          <div class="variant-gallery-thumbs"><button type="button" class="variant-thumb active" data-image="Panty/Pant1.jpeg">
+              <img src="Panty/Pant1.jpeg" alt="Ultra-Stretch Premium Ankle-Length Pants image 1">
+            </button><button type="button" class="variant-thumb" data-image="Panty/Pant2.jpeg">
+              <img src="Panty/Pant2.jpeg" alt="Ultra-Stretch Premium Ankle-Length Pants image 2">
+            </button><button type="button" class="variant-thumb" data-image="Panty/Pant3.jpeg">
+              <img src="Panty/Pant3.jpeg" alt="Ultra-Stretch Premium Ankle-Length Pants image 3">
+            </button><button type="button" class="variant-thumb" data-image="Panty/Pant4.jpeg">
+              <img src="Panty/Pant4.jpeg" alt="Ultra-Stretch Premium Ankle-Length Pants image 4">
+            </button><button type="button" class="variant-thumb" data-image="Panty/Pant5.jpeg">
+              <img src="Panty/Pant5.jpeg" alt="Ultra-Stretch Premium Ankle-Length Pants image 5">
+            </button><button type="button" class="variant-thumb" data-image="Panty/Pant6.jpeg">
+              <img src="Panty/Pant6.jpeg" alt="Ultra-Stretch Premium Ankle-Length Pants image 6">
+            </button><button type="button" class="variant-thumb" data-image="Panty/Pant7.jpeg">
+              <img src="Panty/Pant7.jpeg" alt="Ultra-Stretch Premium Ankle-Length Pants image 7">
+            </button><button type="button" class="variant-thumb" data-image="Panty/Pant8.jpeg">
+              <img src="Panty/Pant8.jpeg" alt="Ultra-Stretch Premium Ankle-Length Pants image 8">
+            </button><button type="button" class="variant-thumb" data-image="Panty/Pant9.jpeg">
+              <img src="Panty/Pant9.jpeg" alt="Ultra-Stretch Premium Ankle-Length Pants image 9">
+            </button><button type="button" class="variant-thumb" data-image="Panty/Pant10.jpeg">
+              <img src="Panty/Pant10.jpeg" alt="Ultra-Stretch Premium Ankle-Length Pants image 10">
+            </button></div>
+
+          <div class="product__meta">
+            <h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3>
+            <div class="product__price">₹ 699</div>
+          </div>
+
+          <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
+
+          <div class="variant-colour-label">
+            Colour: <strong class="variant-selected-name">White</strong>
+          </div>
+
+          <div class="variant-swatches">
+          <button type="button"
+            class="variant-swatch active"
+            data-variant-name="White"
+            data-images='[&quot;Panty/White1.jpeg&quot;,&quot;Panty/White2.jpeg&quot;,&quot;Panty/White3.jpeg&quot;,&quot;Panty/White4.jpeg&quot;,&quot;Panty/White5.jpeg&quot;]'
+            aria-label="White"
+            title="White">
+            <span class="variant-swatch__dot" style="background:#ffffff;"></span>
+          </button>
+          <button type="button"
+            class="variant-swatch"
+            data-variant-name="Black"
+            data-images='[&quot;Panty/Black1.jpeg&quot;,&quot;Panty/Black2.jpeg&quot;,&quot;Panty/Black3.jpeg&quot;,&quot;Panty/Black4.jpeg&quot;,&quot;Panty/Black5.jpeg&quot;]'
+            aria-label="Black"
+            title="Black">
+            <span class="variant-swatch__dot" style="background:#111111;"></span>
+          </button>
+          <button type="button"
+            class="variant-swatch"
+            data-variant-name="Oatmeal"
+            data-images='[&quot;Panty/Oatmeal1.jpeg&quot;,&quot;Panty/Oatmeal2.jpeg&quot;,&quot;Panty/Oatmeal3.jpeg&quot;,&quot;Panty/Oatmeal4.jpeg&quot;,&quot;Panty/Oatmeal5.jpeg&quot;]'
+            aria-label="Oatmeal "
+            title="Oatmeal ">
+            <span class="variant-swatch__dot" style="background:#dedad3;"></span>
+          </button>
+          <button type="button"
+            class="variant-swatch"
+            data-variant-name="Warm Gray"
+            data-images='[&quot;Panty/Warm Gray1.jpeg&quot;,&quot;Panty/Warm Gray2.jpeg&quot;,&quot;Panty/Warm Gray3.jpeg&quot;,&quot;Panty/Warm Gray4.jpeg&quot;,&quot;Panty/Warm Gray5.jpeg&quot;]'
+            aria-label="Warm Gray "
+            title="Warm Gray ">
+            <span class="variant-swatch__dot" style="background:#a69a91;"></span>
+          </button>
+          </div>
+        </article>
+
+
+
+        <!-- SAREE SECTION STARTS -->
+        <!-- <article class="product variant-product" data-cat="SAREE" id="pants-colours">
+          <div class="product__media variant-main-media">
+            <span class="product__badge product__badge--new">New</span>
+            <img class="variant-main-image" src="Panty/Pant1.jpeg" alt="Ultra-Stretch Premium Ankle-Length Pants">
+            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
+          </div>
+          <div class="product__meta">
+            <h3 class="product__title">Kanchi cotton</h3>
+            <div class="product__price">₹ 1,499</div>
+          </div>
+          <div class="variant-colour-label">
+            Colour: <strong class="variant-selected-name">1</strong>
+          </div>
+          <div class="variant-swatches">
+          <button type="button"
+            class="variant-swatch active"
+            data-variant-name="Colour 1"
+            data-images='[&quot;Images\\saree1.jpeg&quot;,&quot;Images\\saree2.jpeg&quot;,&quot;Images\\saree3.jpeg&quot;]'
+            aria-label="Colour 1"
+            title="Colour 1">
+            <!-- <span class="variant-swatch__dot" style="background:#ffffff;"></span> -->
+          <!-- </button> -->
+          <!-- </div> -->
+        <!-- </article>          --> 
+        <!-- SAREE SECTION ENDS -->
 
 
         <article class="product" data-cat="SAREES">
@@ -2394,20 +2600,7 @@ At V, we believe quality should feel accessible. Our production capabilities all
           <p class="product__desc">Kanchi Cotton Elegance with Antique Golden Zari</p>
           <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
         </article>
-
-         <article class="product" data-cat="WOMEN'S PANTS">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">New</span>
-            <img src="Panty/Pant1.jpeg" alt="Women's camisole">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
-          <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-
-         <article class="product" data-cat="WOMEN'S PANTS">
+      <!-- <article class="product" data-cat="WOMEN'S PANTS">
           <div class="product__media">
             <span class="product__badge product__badge--new">New</span>
             <img src="Panty/Pant2.jpeg" alt="Women's camisole">
@@ -2415,22 +2608,9 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div>
           <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
           <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-         <article class="product" data-cat="WOMEN'S PANTS">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">New</span>
-            <img src="Panty/Pant3.jpeg" alt="Women's camisole">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
-          <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-
-         <article class="product" data-cat="WOMEN'S PANTS">
+          <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div>
+        </article> -->
+<!-- <article class="product" data-cat="WOMEN'S PANTS">
           <div class="product__media">
             <span class="product__badge product__badge--new">New</span>
             <img src="Panty/Pant4.jpeg" alt="Women's camisole">
@@ -2438,24 +2618,9 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div>
           <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
           <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
+          <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div>
         </article>
-
-         <article class="product" data-cat="WOMEN'S PANTS">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">New</span>
-            <img src="Panty/Pant5.jpeg" alt="Women's camisole">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
-          <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-        
-
-
-
-         <article class="product" data-cat="WOMEN'S PANTS">
+<article class="product" data-cat="WOMEN'S PANTS">
           <div class="product__media">
             <span class="product__badge product__badge--new">New</span>
             <img src="Panty/Pant6.jpeg" alt="Women's camisole">
@@ -2463,26 +2628,9 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div>
           <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
           <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
+          <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div>
         </article>
-
-
-
-         <article class="product" data-cat="WOMEN'S PANTS">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">New</span>
-            <img src="Panty/Pant7.jpeg" alt="Women's camisole">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
-          <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>        
-
-
-
-
-         <article class="product" data-cat="WOMEN'S PANTS">
+<article class="product" data-cat="WOMEN'S PANTS">
           <div class="product__media">
             <span class="product__badge product__badge--new">New</span>
             <img src="Panty/Pant8.jpeg" alt="Women's camisole">
@@ -2490,26 +2638,9 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div>
           <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
           <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
+          <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div>
         </article>
-
-
-
-
-         <article class="product" data-cat="WOMEN'S PANTS">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">New</span>
-            <img src="Panty/Pant9.jpeg" alt="Women's camisole">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
-          <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-
-
-         <article class="product" data-cat="WOMEN'S PANTS">
+<article class="product" data-cat="WOMEN'S PANTS">
           <div class="product__media">
             <span class="product__badge product__badge--new">New</span>
             <img src="Panty/Pant10.jpeg" alt="Women's camisole">
@@ -2517,23 +2648,9 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div>
           <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
           <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
+          <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div>
         </article>
-
-         <article class="product" data-cat="WOMEN'S PANTS">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">New</span>
-            <img src="Panty/Pant11.jpeg" alt="Women's camisole">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
-          <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-
-
-         <article class="product" data-cat="WOMEN'S PANTS">
+<article class="product" data-cat="WOMEN'S PANTS">
           <div class="product__media">
             <span class="product__badge product__badge--new">New</span>
             <img src="Panty/Pant12.jpeg" alt="Women's camisole">
@@ -2541,22 +2658,9 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div>
           <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
           <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
+          <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div>
         </article>
-
-
-         <article class="product" data-cat="WOMEN'S PANTS">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">New</span>
-            <img src="Panty/Pant13.jpeg" alt="Women's camisole">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
-          <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-         <article class="product" data-cat="WOMEN'S PANTS">
+<article class="product" data-cat="WOMEN'S PANTS">
           <div class="product__media">
             <span class="product__badge product__badge--new">New</span>
             <img src="Panty/Pant14.jpeg" alt="Women's camisole">
@@ -2564,21 +2668,9 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div>
           <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
           <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
+          <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div>
         </article>
-
-         <article class="product" data-cat="WOMEN'S PANTS">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">New</span>
-            <img src="Panty/Pant15.jpeg" alt="Women's camisole">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
-          <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-         <article class="product" data-cat="WOMEN'S PANTS">
+<article class="product" data-cat="WOMEN'S PANTS">
           <div class="product__media">
             <span class="product__badge product__badge--new">New</span>
             <img src="Panty/Pant16.jpeg" alt="Women's camisole">
@@ -2586,22 +2678,9 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div>
           <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
           <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
+          <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div>
         </article>
-
-         <article class="product" data-cat="WOMEN'S PANTS">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">New</span>
-            <img src="Panty/Pant17.jpeg" alt="Women's camisole">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
-          <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-
-         <article class="product" data-cat="WOMEN'S PANTS">
+<article class="product" data-cat="WOMEN'S PANTS">
           <div class="product__media">
             <span class="product__badge product__badge--new">New</span>
             <img src="Panty/Pant18.jpeg" alt="Women's camisole">
@@ -2609,23 +2688,9 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div>
           <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
           <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
+          <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div>
         </article>
-
-
-         <article class="product" data-cat="WOMEN'S PANTS">
-          <div class="product__media">
-            <span class="product__badge product__badge--new">New</span>
-            <img src="Panty/Pant19.jpeg" alt="Women's camisole">
-            <a href="#enquiry" class="product__quick"><span class="product__quick-label">Enquire</span><span class="product__quick-arrow">→</span></a>
-          </div>
-          <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
-          <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
-
-
-         <article class="product" data-cat="WOMEN'S PANTS">
+<article class="product" data-cat="WOMEN'S PANTS">
           <div class="product__media">
             <span class="product__badge product__badge--new">New</span>
             <img src="Panty/Pant20.jpeg" alt="Women's camisole">
@@ -2633,8 +2698,8 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div>
           <div class="product__meta"><h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3><div class="product__price">₹ 899</div></div>
           <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
-          <!-- <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div> -->
-        </article>
+          <div class="product__swatches"><span class="product__swatch product__swatch--sage"></span><span class="product__swatch product__swatch--clay"></span><span class="product__swatch product__swatch--wine"></span></div>
+        </article> -->
 
         <!-- <article class="product" data-cat="premium">
           <div class="product__media">
@@ -2892,7 +2957,7 @@ At V, we believe quality should feel accessible. Our production capabilities all
         <div>
           <div class="eyebrow">Get in Touch</div>
           <h2>Reach us <em>any</em> way you prefer.</h2>
-          <p style="margin-bottom: 2.5rem; max-width: 38ch;">Whether it's a quick WhatsApp message, a formal email, or a visit to our Tirupur facility — we're here. Pick the channel that suits you.</p>
+          <p style="margin-bottom: 2.5rem; max-width: 38ch;">Whether it's a quick WhatsApp message, a formal email, or Online order we are ready to help and export. Pick the channel that suits for you.</p>
 
           <div class="quick-chat">
             <div class="quick-chat__label">Fastest Response</div>
@@ -2905,9 +2970,9 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div>
 
           <ul class="info-list">
-            <li class="info-item"><div class="info-label">Office</div><div class="info-value">VAV Global Enterprises<span>14, Knitting Park Road, Tirupur — 641603, Tamil Nadu, India</span></div></li>
+            <li class="info-item"><div class="info-label">Office</div><div class="info-value">VAV Global Enterprises</div></li>
             <li class="info-item"><div class="info-label">Phone</div><div class="info-value">+91 97895 40493<span>Mon — Sat · 09:30 — 18:30 IST</span></div></li>
-            <li class="info-item"><div class="info-label">Email</div><div class="info-value">vavglobalenterprises@gmail.com<span>Wholesale · export@vavglobal.in</span></div></li>
+            <li class="info-item"><div class="info-label">Email</div><div class="info-value">vavglobalenterprises@gmail.com</div></li>
             <li class="info-item"><div class="info-label">GST</div><div class="info-value">33BKFPV0976E1Z1<span></span></div></li>
           </ul>
 
@@ -3077,7 +3142,7 @@ newMessageBtn.addEventListener("click", function() {
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About Us</a></li>
-        <li><a href="#gallery">Gallery</a></li>
+        <!-- <li><a href="#gallery">Gallery</a></li> -->
         <li><a href="#collection">Collection</a></li>
         <li><a href="#enquiry">Enquiry</a></li>
         <li><a href="#contact">Contact Us</a></li>
@@ -3178,6 +3243,99 @@ newMessageBtn.addEventListener("click", function() {
 </script>
 
 
+
+
+<script>
+/* ============================================================
+   VAV PRODUCT VARIANT ENGINE
+   One product card -> multiple colour buckets -> own gallery.
+   ============================================================ */
+(function () {
+  function initVariantProducts() {
+    document.querySelectorAll('.variant-product').forEach(function (product) {
+
+      const mainImage = product.querySelector('.variant-main-image');
+      const thumbs = product.querySelector('.variant-gallery-thumbs');
+      const swatches = product.querySelectorAll('.variant-swatch');
+      const selectedName = product.querySelector('.variant-selected-name');
+
+      if (!mainImage || !thumbs || !swatches.length) return;
+
+      function showGallery(button) {
+        let images = [];
+
+        try {
+          images = JSON.parse(button.getAttribute('data-images') || '[]');
+        } catch (error) {
+          console.error('VAV gallery: invalid image list', error);
+          return;
+        }
+
+        if (!images.length) return;
+
+        swatches.forEach(function (item) {
+          item.classList.remove('active');
+        });
+        button.classList.add('active');
+
+        selectedName.textContent = button.getAttribute('data-variant-name') || '';
+
+        thumbs.innerHTML = '';
+
+        images.forEach(function (src, index) {
+          const thumb = document.createElement('button');
+          thumb.type = 'button';
+          thumb.className = 'variant-thumb' + (index === 0 ? ' active' : '');
+          thumb.setAttribute('data-image', src);
+          thumb.setAttribute('aria-label', 'View image ' + (index + 1));
+
+          const image = document.createElement('img');
+          image.src = src;
+          image.alt = (selectedName.textContent || 'Product') + ' image ' + (index + 1);
+          image.loading = index === 0 ? 'eager' : 'lazy';
+
+          thumb.appendChild(image);
+          thumbs.appendChild(thumb);
+        });
+
+        mainImage.src = images[0];
+        mainImage.alt = (selectedName.textContent || 'Product') + ' product image';
+      }
+
+      swatches.forEach(function (button) {
+        button.addEventListener('click', function () {
+          showGallery(button);
+        });
+      });
+
+      thumbs.addEventListener('click', function (event) {
+        const button = event.target.closest('.variant-thumb');
+        if (!button) return;
+
+        const image = button.getAttribute('data-image');
+        if (!image) return;
+
+        mainImage.src = image;
+
+        thumbs.querySelectorAll('.variant-thumb').forEach(function (item) {
+          item.classList.remove('active');
+        });
+
+        button.classList.add('active');
+      });
+
+      /* Load first colour bucket on page load */
+      showGallery(swatches[0]);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVariantProducts);
+  } else {
+    initVariantProducts();
+  }
+})();
+</script>
 
 </body>
 </html>

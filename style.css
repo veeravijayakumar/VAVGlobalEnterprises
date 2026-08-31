@@ -199,3 +199,113 @@ body::before {
         min-width: 19px !important;
     }
 }
+/* =========================================================
+   TOP ANNOUNCEMENT — CONTINUOUS RIGHT TO LEFT
+   ========================================================= */
+
+.announcement-bar {
+    width: 100%;
+    height: 42px;
+    background: #761d28;
+    color: #ffffff;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #b8924a;
+    border-bottom: 1px solid #b8924a;
+}
+
+.announcement-track {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    width: max-content;
+    white-space: nowrap;
+
+    animation: announcement-scroll 18s linear infinite;
+}
+
+.announcement-quality {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    color: #ffffff;
+}
+
+.announcement-quality::first-letter {
+    color: #d4b576;
+}
+
+/* NEW ARRIVALS */
+.announcement-new {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 165px;
+    height: 28px;
+    padding: 0 15px;
+
+    background: #f1f51a;
+    color: #8b0010;
+
+    border-radius: 5px;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+
+    box-shadow: 0 0 10px rgba(241,245,26,0.35);
+}
+
+/* Continuous right → left movement */
+@keyframes announcement-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+
+/* =========================================================
+   EXCLUSIVE FOR WOMENS — BLINKING WHITE
+   ========================================================= */
+
+.nav__exclusive {
+    display: inline-block;
+
+    background: #6b1f2a;
+    color: #ffffff;
+
+    padding: 7px 13px;
+
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    border-radius: 2px;
+
+    animation: exclusive-blink 1.2s ease-in-out infinite;
+}
+
+/* Soft blink — not too aggressive */
+@keyframes exclusive-blink {
+    0%,
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+
+    50% {
+        opacity: 0.35;
+        box-shadow: 0 0 12px rgba(255,255,255,0.45);
+    }
+}
