@@ -1421,98 +1421,206 @@ body::before {
 
 <!-- ========== ANNOUNCEMENT ========== -->
 <div class="announce">
-  <div class="announce__track">
-    <!-- <span>VAV Global Enterprises</span> -->
-    <!-- <span>WhatsApp us for bulk enquiries</span> -->
-    <!-- <span class="announcement-quality">
-      ✦ &nbsp; WE NEVER COMPROMISE ON OUR QUALITY &nbsp; ✦
-    </span>
+  <div class="announce__viewport">
+    <div class="announce__track">
 
-    <span class="announcement-new">
-      ★ &nbsp; NEW ARRIVALS
-    </span> -->
+      <!-- GROUP 1 -->
+      <div class="announce__group">
+        <Marquee><span class="announcement-quality">
+          ✦ &nbsp; WE NEVER COMPROMISE ON OUR QUALITY &nbsp; ✦
+        </span>
 
-    <!-- Duplicate for seamless continuous scrolling -->
-    <!-- <span class="announcement-quality">
-      ✦ &nbsp; WE NEVER COMPROMISE ON OUR QUALITY &nbsp; ✦
-    </span> -->
+        <a href="https://www.instagram.com/vavglobalenterprises?igsi=OW9meXhidnYxbzc2"
+           class="shimmer-blink-btn"
+           target="_blank"
+           rel="noopener">
+          <span class="btn-icon">✨</span> NEW ARRIVALS
+        </a></Marquee>
+      </div>
 
-    <!-- <span class="announcement-new">
-      ★ &nbsp; NEW ARRIVALS
-    </span> -->
-    <span> We Never Compromise on Our Quality</span>
-    
-    <span>
+      <!-- GROUP 2: exact duplicate makes the loop seamless -->
+      <!-- <div class="announce__group" aria-hidden="true">
+        <span class="announcement-quality">
+          ✦ &nbsp; WE NEVER COMPROMISE ON OUR QUALITY &nbsp; ✦
+        </span></Marquee>
+
+        <a href="https://www.instagram.com/vavglobalenterprises?igsi=OW9meXhidnYxbzc2"
+           class="shimmer-blink-btn"
+           tabindex="-1"
+           aria-hidden="true">
+          <span class="btn-icon">✨</span> NEW ARRIVALS
+        </a></Marquee>
+      </div> -->
+
+    </div>
+  </div>
+</div>
+
 <style>
-@keyframes shimmer {
-  0% { left: -150%; }
-  50% { left: -150%; }
-  100% { left: 150%; }
+/* Announcement text/button styling only */
+.announce__viewport {
+  width: 100%;
+  overflow: hidden;
 }
-@keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0.4; }
-  100% { opacity: 1; }
+
+.announce__track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  will-change: transform;
+  animation: vavAnnouncementLoop 18s linear infinite;
 }
+
+.announce__group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 70px;
+  padding-right: 70px;
+}
+
+.announcement-quality {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+}
+
 .shimmer-blink-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  
-  /* Vertical alignment correction for the entire button inside the bar */
-  vertical-align: middle; 
-  
+  flex-shrink: 0;
+  min-width: 165px;
+  height: 28px;
+  padding: 0 15px;
   overflow: hidden;
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: 11px; /* Matches the refined header text size */
-  letter-spacing: 1px;
+  border-radius: 5px;
+  background: #f1f51a;
+  color: #8b0010;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
   text-decoration: none;
-  
-  /* Match the styling from your image */
-  color: #c00000; 
-  background: #f1f227; 
-  
-  padding: 4px 12px; 
-  border-radius: 4px;
-  animation: blink 1.5s infinite ease-in-out;
+  box-shadow: 0 0 10px rgba(241,245,26,.35);
+  animation: vavNewArrivalBlink 1.5s ease-in-out infinite;
 }
 
-/* Specific styling to force the star to align perfectly with text */
-.btn-icon {
+.shimmer-blink-btn .btn-icon {
   display: inline-flex;
   align-items: center;
-  margin-right: 6px; /* Perfect space between star and text */
-  font-size: 13px; /* Controls star size natively */
+  margin-right: 6px;
   line-height: 1;
 }
 
 .shimmer-blink-btn::after {
   content: '';
   position: absolute;
-  top: 0; left: -150%; width: 50%; height: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.6),
+    transparent
+  );
   transform: skewX(-20deg);
-  animation: shimmer 3s infinite linear;
+  animation: vavNewArrivalShimmer 2.8s linear infinite;
+  pointer-events: none;
+}
+
+/* IMPORTANT: move by exactly one complete group */
+@keyframes vavAnnouncementLoop {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes vavNewArrivalBlink {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(241,245,26,.35);
+  }
+  50% {
+    opacity: .72;
+    box-shadow: 0 0 16px rgba(241,245,26,.6);
+  }
+}
+
+@keyframes vavNewArrivalShimmer {
+  from {
+    left: -150%;
+  }
+  to {
+    left: 150%;
+  }
+}
+
+/* Mobile/tablet: same animation, slightly faster */
+@media (max-width: 768px) {
+  .announce__track {
+    animation-duration: 14s;
+  }
+
+  .announce__group {
+    gap: 100px;
+    padding-right: 100px;
+  }
+
+  .announcement-quality {
+    font-size: 10px;
+    letter-spacing: .20em;
+  }
+
+  .shimmer-blink-btn {
+    min-width: 145px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .announce__track {
+    animation-duration: 12s;
+  }
+
+  .announce__group {
+    gap: 30px;
+    padding-right: 50px;
+  }
+
+  .announcement-quality {
+    font-size: 9px;
+    letter-spacing: .14em;
+  }
+
+  .shimmer-blink-btn {
+    min-width: 135px;
+    height: 26px;
+    padding: 0 10px;
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announce__track,
+  .shimmer-blink-btn,
+  .shimmer-blink-btn::after {
+    animation: none !important;
+  }
 }
 </style>
-
-<a href="https://www.instagram.com/vavglobalenterprises?igsi=OW9meXhidnYxbzc2" class="shimmer-blink-btn">
-  <span class="btn-icon">✨</span>NEW ARRIVALS
-    <!-- <span class="announcement-quality">
-      ✦ &nbsp; WE NEVER COMPROMISE ON OUR QUALITY &nbsp; ✦
-    </span> -->
-
-    <!-- <span class="announcement-new">
-      ★ &nbsp; NEW ARRIVALS
-    </span> -->
-</a>
-
-
-    </span>
-  </div>
-</div>
 
 <style>
 @keyframes softBlink {
@@ -1606,12 +1714,12 @@ body::before {
        target="_blank"
        class="nav__icon nav__icon--wa"
        aria-label="WhatsApp">
-
+      <img src="Images/wa_logo.png">
         <!-- YOUR EXISTING WHATSAPP SVG -->    
     </a>
-    <button class="nav__icon" type="button" aria-label="Search">
+    <!-- <button class="nav__icon" type="button" aria-label="Search">
         ⌕
-    </button>
+    </button> -->
     <a href="#enquiry" class="nav__cta">Wholesale</a>
     <!-- <button class="nav__icon" aria-label="Search">⌕</button> -->
     <!-- <a href="#enquiry" class="nav__cta">Wholesale</a> -->
@@ -2077,7 +2185,7 @@ At V, we believe quality should feel accessible. Our production capabilities all
         <h1 class="page-hero__title">Six lines, <em>one</em> standard.</h1>
       </div>
       <div>
-        <p class="page-hero__desc">Filter by category to explore every piece. Each style is knitted, cut and finished in Tirupur — same factory, same hands, same standard for Especially women.</p>
+        <p class="page-hero__desc">Filter by category to explore every piece. Each style is knitted, cut and finished in Tirupur - same hands, same standard for Especially women.</p>
       </div>
     </div>
     <!-- Mobile menu button -->
@@ -2160,7 +2268,7 @@ At V, we believe quality should feel accessible. Our production capabilities all
           </div>
           <!-- <div class="product__meta"><h3 class="product__title">Micro-modal Trunk</h3><div class="product__price">₹ 890<span class="product__price-old">₹ 1,190</span></div></div> -->
           <!-- <p class="product__desc">220 gsm Lenzing modal. Bonded waistband, single back panel, no side seams.</p> -->
-            <div class="product__meta"><h3 class="product__title">Cloud soft panty - Combo</h3><div class="product__price">Pack of 3-₹.449</div></div>
+            <div class="product__meta"><h3 class="product__title">Cloud soft panty - Combo</h3><div class="product__price">Pack of 3 - ₹449</div></div>
             <p style="color: white;"></p>96% cotton<br>
             4% spandex<br>
             Style:<strong>Classic</strong><br>
@@ -2328,7 +2436,7 @@ At V, we believe quality should feel accessible. Our production capabilities all
             <div class="product__price">₹ 160</div>
           </div>
 
-          <p class="product__desc">96% cotton ·<br> 4% spandex ·<br> Breathable cotton elastane stretch fabric · <br>Full coverage and all-day comfort.<br> Forward side same for added coverage. <br>Oft-grip waist elastic feels easy on skin.</p>
+          <p class="product__desc">96% cotton ·<br> 4% spandex ·<br>Style:Classic<br> Breathable cotton elastane stretch fabric · <br>Full coverage and all-day comfort.<br> Forward side same for added coverage. <br>Oft-grip waist elastic feels easy on skin.</p>
 
           <div class="variant-colour-label">
             Colour: <strong class="variant-selected-name">Colour 1</strong>
@@ -2338,7 +2446,7 @@ At V, we believe quality should feel accessible. Our production capabilities all
           <button type="button"
             class="variant-swatch active"
             data-variant-name="Colour 1"
-            data-images='[&quot;WomensInner\\Image111.jpeg&quot;,&quot;WomensInner\\Image112.jpeg&quot;]'
+            data-images='[&quot;WomensInner\\Image112.jpeg&quot;,&quot;WomensInner\\Image111.jpeg&quot;]'
             aria-label="Colour 1"
             title="Colour 1">
             <span class="variant-swatch__dot" style="background:#000185;"></span>
@@ -2392,11 +2500,16 @@ At V, we believe quality should feel accessible. Our production capabilities all
             </button></div>
 
           <div class="product__meta">
-            <h3 class="product__title">The SecondSkin CloudComfort Wireless Bra</h3>
-            <div class="product__price">₹ 339<span class="product__price-old">₹ 899</span></div>
+            <h3 class="product__title">V Comfy full coverage Bra for Women | Cotton Spandex, Wireless, Side Cushioning | Reinforced Stitches | Seamless Fit for Full Figures</h3>
+            <div class="product__price">₹339</div>
           </div>
 
-          <p class="product__desc">Pure Lenzing modal luxury. Zero wires. Zero seams.</p>
+          <p class="product__desc">Style : Modern<br> Material composition : Cotton Spandex<br><strong> Description </strong><br>Made of premium Cotton Spandex fabric for exceptional comfort, flexibility, and all-day wearability</p>
+          <!-- <p class="product__desc">Modern</p>
+          <p class="product__desc"><strong> Material composition :</strong></p>
+          <p class="product__desc">Cotton Spandex</p>
+          <p class="product__desc"><strong> Description </strong></p>
+          <p class="product__desc">Made of premium Cotton Spandex fabric for exceptional comfort, flexibility, and all-day wearability</p> -->
 
           <div class="variant-colour-label">
             Colour: <strong class="variant-selected-name">Colour 1</strong>
@@ -2491,7 +2604,7 @@ At V, we believe quality should feel accessible. Our production capabilities all
 
           <div class="product__meta">
             <h3 class="product__title">Ultra-Stretch Premium Ankle-Length Pants</h3>
-            <div class="product__price">₹ 699</div>
+            <div class="product__price">₹ 599</div>
           </div>
 
           <p class="product__desc">Crafted from thick, heavy-weight luxury fabric that is 100% opaque and squat-proof.</p>
@@ -2559,11 +2672,11 @@ At V, we believe quality should feel accessible. Our production capabilities all
             data-images='[&quot;Images\\saree1.jpeg&quot;,&quot;Images\\saree2.jpeg&quot;,&quot;Images\\saree3.jpeg&quot;]'
             aria-label="Colour 1"
             title="Colour 1">
-            <!-- <span class="variant-swatch__dot" style="background:#ffffff;"></span> -->
-          <!-- </button> -->
-          <!-- </div> -->
-        <!-- </article>          --> 
-        <!-- SAREE SECTION ENDS -->
+            <span class="variant-swatch__dot" style="background:#ffffff;"></span>
+          </button>
+          </div>
+        </article>          
+        SAREE SECTION ENDS -->
 
 
         <article class="product" data-cat="SAREES">
